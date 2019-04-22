@@ -541,6 +541,7 @@ class ContextTest(test_base.BaseTestCase):
         user_domain = uuid.uuid4().hex
         tenant = uuid.uuid4().hex
         project_domain = uuid.uuid4().hex
+        project_tags = [uuid.uuid4().hex, uuid.uuid4().hex]
         roles = [uuid.uuid4().hex, uuid.uuid4().hex, uuid.uuid4().hex]
         service_user_id = uuid.uuid4().hex
         service_project_id = uuid.uuid4().hex
@@ -551,6 +552,7 @@ class ContextTest(test_base.BaseTestCase):
                                      user_domain=user_domain,
                                      tenant=tenant,
                                      project_domain=project_domain,
+                                     project_tags=project_tags,
                                      roles=roles,
                                      service_user_id=service_user_id,
                                      service_project_id=service_project_id,
@@ -562,6 +564,7 @@ class ContextTest(test_base.BaseTestCase):
                           'domain_id': None,
                           'project_id': tenant,
                           'project_domain_id': project_domain,
+                          'project_tags': project_tags,
                           'roles': roles,
                           'is_admin_project': True,
                           'service_user_id': service_user_id,
@@ -589,6 +592,7 @@ class ContextTest(test_base.BaseTestCase):
                           'domain_id': None,
                           'project_id': None,
                           'project_domain_id': None,
+                          'project_tags': None,
                           'roles': roles,
                           'is_admin_project': True,
                           'service_user_id': service_user_id,
@@ -614,6 +618,7 @@ class ContextTest(test_base.BaseTestCase):
                           'domain_id': domain_id,
                           'project_id': None,
                           'project_domain_id': None,
+                          'project_tags': None,
                           'roles': roles,
                           'is_admin_project': True,
                           'service_user_id': service_user_id,
@@ -639,6 +644,7 @@ class ContextTest(test_base.BaseTestCase):
                           'domain_id': None,
                           'project_id': tenant,
                           'project_domain_id': project_domain,
+                          'project_tags': None,
                           'roles': roles,
                           'is_admin_project': False,
                           'service_user_id': service_user_id,

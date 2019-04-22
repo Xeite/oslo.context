@@ -58,6 +58,7 @@ _ENVIRON_HEADERS = {
                      'HTTP_X_TENANT_NAME'],
     'user_domain_name': ['HTTP_X_USER_DOMAIN_NAME'],
     'project_domain_name': ['HTTP_X_PROJECT_DOMAIN_NAME'],
+    'project_tags': ['HTTP_X_PROJECT_TAGS'],
     'request_id': ['openstack.request_id'],
     'global_request_id': ['openstack.global_request_id'],
 
@@ -210,6 +211,7 @@ class RequestContext(object):
                  domain_name=None,
                  user_domain_name=None,
                  project_domain_name=None,
+                 project_tags=None,
                  is_admin_project=True,
                  service_token=None,
                  service_user_id=None,
@@ -251,6 +253,7 @@ class RequestContext(object):
         self.system_scope = system_scope
         self.user_domain_name = user_domain_name
         self.project_domain_name = project_domain_name
+        self.project_tags = project_tags
         self.is_admin = is_admin
         self.is_admin_project = is_admin_project
         self.read_only = read_only
@@ -322,6 +325,7 @@ class RequestContext(object):
             'domain_id': self.domain_id,
             'project_id': self.project_id,
             'project_domain_id': self.project_domain_id,
+            'project_tags': self.project_tags,
             'roles': self.roles,
             'is_admin_project': self.is_admin_project,
             'service_user_id': self.service_user_id,
@@ -346,6 +350,7 @@ class RequestContext(object):
                 'domain': self.domain_id,
                 'user_domain': self.user_domain_id,
                 'project_domain': self.project_domain_id,
+                'project_tags': self.project_tags,
                 'is_admin': self.is_admin,
                 'read_only': self.read_only,
                 'show_deleted': self.show_deleted,
@@ -363,7 +368,8 @@ class RequestContext(object):
                   'project_name': self.project_name,
                   'domain_name': self.domain_name,
                   'user_domain_name': self.user_domain_name,
-                  'project_domain_name': self.project_domain_name}
+                  'project_domain_name': self.project_domain_name,
+                  'project_tags': self.project_tags}
         values.update(self.to_dict())
         if self.auth_token:
             # NOTE(jaosorior): Gotta obfuscate the token since this dict is
@@ -411,6 +417,7 @@ class RequestContext(object):
         kwargs.setdefault('user_domain_name', values.get('user_domain_name'))
         kwargs.setdefault('project_domain_name',
                           values.get('project_domain_name'))
+        kwargs.setdefault('project_tags', values.get('project_tags'))
         kwargs.setdefault('is_admin_project',
                           values.get('is_admin_project', True))
         for key in cls.FROM_DICT_EXTRA_KEYS:
